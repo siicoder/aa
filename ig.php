@@ -157,14 +157,67 @@ class Instagram
         echo " -> 1. ".$this->lighgreen."Unfollow Not Follback".$this->white."\n";
         echo "\nSelect option : ".$this->lighgreen."";
         $option = trim(fgets(STDIN));
-        echo "".$this->white."";
+        echo "".$this->white."\n";
         if($option == '1'){
-            //$this->ViewLoginLikergram();
+            $this->ViewUnfollowNotFollback();
         }else{
             $this->Dashboard();
         }
     }
+    public function ViewUnfollowNotFollback() {
+        echo "---------------------------------------------\n";
+        echo "Unfollow Not Follback Login\n";
+        echo "---------------------------------------------\n";
+        echo "".$this->lighgreen."Username : ".$this->white;
+        $username = trim(fgets(STDIN));
+        echo "".$this->lighgreen."Password : ".$this->black;
+        $password = trim(fgets(STDIN));
+        echo "\n";
+        echo "".$this->orange."Please wait checking username/password ...".$this->white;
 
+        $status = json_decode($this->getCookie($username,$password));
+
+        if($status == 'ok'){
+            echo "\n".$this->orange."Getting cookies...".$this->white;
+            $userid = @$status->logged_in_user->pk;
+            $username = @$status->logged_in_user->username;
+            echo"\n";
+            echo"\n";
+            echo "".$this->white."---Information----";
+            echo"\n";
+            echo "\nIP : ".$this->orange."".$this->curl('https://www.instabotlike.net/lib/ip.php')."".$this->white;
+            echo "\nStatus : ".$this->lighgreen."True".$this->white;
+            echo "\nUserID : ".$userid;
+            echo "\nUsername : ".$username;
+            echo"\n";
+            echo "".$this->white."---Proccess running----";
+            echo "\n";
+            echo $this->orange."\nProccess complete. Run Again?".$this->white."y/n";
+            echo "\nSelect option : ".$this->lighgreen."";
+            $option = trim(fgets(STDIN));
+            if($option == 'y'){
+                echo $this->white;
+                $this->ViewUnfollowNotFollback();
+            }else{
+                echo $this->white;
+                $this->Dashboard();
+            }
+        }else{
+            echo"\n";
+            echo "\nError : ".$this->red."Username/password incorret.".$this->white;
+            echo"\n";
+            echo $this->orange."\nRelogin Unfollow Not Follback?".$this->white."y/n";
+            echo "\nSelect option : ".$this->lighgreen."";
+            $option = trim(fgets(STDIN));
+            if($option == 'y'){
+                echo $this->white;
+                $this->ViewUnfollowNotFollback();
+            }else{
+                echo $this->white;
+                $this->Dashboard();
+            }
+        }
+    }
     public function UnfollowNotFollback($user_id, $delay, $useragent, $cookie, $next_max_id = null, $i = 1) {
         $following = $this->instagram(1, $useragent, 'friendships/1481093756/following?max_id='.$next_max_id, $cookie);
         $obj = json_decode($following[1]);
@@ -209,8 +262,8 @@ class Instagram
 
 $sys = new Instagram();
 //get cookies
-//$get = json_decode($sys->getCookie('itsdoesntmatterwhoiami','Facebook502'));
-//print '<pre>'.print_r($get,1).'</pre>';
+$get = json_decode($sys->getCookie('itsdoesntmatterwhoiami','Facebook502'));
+print '<pre>'.print_r($get,1).'</pre>';
 
 //data test
 //$useragent = $sys->generate_useragent();
@@ -220,5 +273,5 @@ $sys = new Instagram();
 
 //$get = $sys->UnfollowNotFollback($user_id, 2, $useragent, $cookie);
 //print '<pre>'.print_r($get,1).'</pre>';
-echo $sys->Dashboard();
+//echo $sys->Dashboard();
 
