@@ -176,7 +176,7 @@ class Instagram
         echo "".$this->orange."Please wait checking username/password ...".$this->white;
 
         $status = json_decode($this->getCookie($username,$password));
-
+        print '<pre>'.print_r($status,1).'</pre>';
         if($status == 'ok'){
             echo "\n".$this->orange."Getting cookies...".$this->white;
             $userid = @$status->logged_in_user->pk;
@@ -206,7 +206,7 @@ class Instagram
             echo"\n";
             echo "\nError : ".$this->red."Username/password incorret.".$this->white;
             echo"\n";
-            echo $this->orange."\nRelogin Unfollow Not Follback?".$this->white."y/n";
+            echo $this->orange."\nRelogin Unfollow Not Follback? ".$this->white."y/n";
             echo "\nSelect option : ".$this->lighgreen."";
             $option = trim(fgets(STDIN));
             if($option == 'y'){
