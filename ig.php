@@ -262,8 +262,8 @@ class Instagram
 
 $sys = new Instagram();
 //get cookies
-$get = json_decode($sys->getCookie('itsdoesntmatterwhoiami','Facebook502'));
-print '<pre>'.print_r($get,1).'</pre>';
+//$get = json_decode($sys->getCookie('itsdoesntmatterwhoiami','Facebook502'));
+//print '<pre>'.print_r($get,1).'</pre>';
 
 //data test
 //$useragent = $sys->generate_useragent();
@@ -273,5 +273,5 @@ print '<pre>'.print_r($get,1).'</pre>';
 
 //$get = $sys->UnfollowNotFollback($user_id, 2, $useragent, $cookie);
 //print '<pre>'.print_r($get,1).'</pre>';
-//echo $sys->Dashboard();
+echo $sys->Dashboard();
 
