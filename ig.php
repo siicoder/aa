@@ -176,8 +176,7 @@ class Instagram
         echo "".$this->orange."Please wait checking username/password ...".$this->white;
 
         $status = json_decode($this->getCookie($username,$password));
-        print '<pre>'.print_r($status,1).'</pre>';
-        if($status == 'ok'){
+        if($status->status == 'ok'){
             echo "\n".$this->orange."Getting cookies...".$this->white;
             $userid = @$status->logged_in_user->pk;
             $username = @$status->logged_in_user->username;
@@ -192,7 +191,7 @@ class Instagram
             echo"\n";
             echo "".$this->white."---Proccess running----";
             echo "\n";
-            echo $this->orange."\nProccess complete. Run Again?".$this->white."y/n";
+            echo $this->orange."\nProccess complete. Run Again? ".$this->white."y/n";
             echo "\nSelect option : ".$this->lighgreen."";
             $option = trim(fgets(STDIN));
             if($option == 'y'){
