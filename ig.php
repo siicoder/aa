@@ -7,7 +7,7 @@ class Instagram
 {
     function __construct() {
         date_default_timezone_set("Asia/Jakarta");
-        $this->date = date("Y-m-d");
+        $this->date = date("h:i:s");
         $this->nc = "\e[0m";
         $this->white = "\e[37m";
         $this->black = "\e[0;30m";
@@ -244,6 +244,7 @@ class Instagram
                 //    print '<font color="blue">Mengunfollow</font> @'.$username.' <font color="red">gagal</font><br>';
                 //}
                 if($ij >= 10){
+                    echo $this->white."[".$this->date."] ".$this->yellow." Delay ".$delay." seconds".$this->white."\n";
                     sleep($delay);
                     $ij = 0;
                 }
@@ -273,6 +274,6 @@ $sys = new Instagram();
 //$media_id = '1766876514429093941_1913408560';
 
 //$get = $sys->UnfollowNotFollback($user_id, 2, $useragent, $cookie);
-//print '<pre>'.print_r($get,1).'</pre>';
-echo $sys->Dashboard();
+print '<pre>'.print_r($sys->date,1).'</pre>';
+//echo $sys->Dashboard();
 
