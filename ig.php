@@ -188,7 +188,7 @@ class Instagram
             echo "\nUsername : ".$username;
             echo"\n";
             echo"\n";
-            echo "".$this->lighgreen."Delay : ".$this->white;
+            echo "".$this->lighgreen."Delay(in seconds) : ".$this->white;
             $delay = trim(fgets(STDIN));
             echo "\n";
             echo "".$this->white."---Proccess running----";
@@ -232,7 +232,7 @@ class Instagram
             $cek = json_decode($check[1]);
             if($cek->followed_by == false){
                 $ij = $ij + 1;
-                echo $this->white."[".$this->date."]".$username.$this->yellow."[".$ij."] @".$username.$this->red." Belum follback!".$this->white."\n";
+                echo $this->white."[".$this->date."]".$this->yellow."[".$ij."]".$this->white." @".$username.$this->red." Belum follback!".$this->white."\n";
                 //$unfollow = $this->instagram(1, $useragent, 'friendships/destroy/'.$user_id.'/', $cookie, $this->generateSignature('{"user_id":"'.$user_id.'"}'));
                 //$obj2 = json_decode($unfollow[1]);
                 //if($obj2->status == "ok"){
