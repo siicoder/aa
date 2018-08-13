@@ -184,13 +184,19 @@ class Instagram
             echo"\n";
             echo "".$this->white."---Information----";
             echo"\n";
-            echo "\nIP : ".$this->orange."".$this->curl('https://www.instabotlike.net/lib/ip.php')."".$this->white;
+            $ip = $this->curl('https://www.instabotlike.net/lib/ip.php');
+            echo "\nIP : ".$this->orange."".$ip[1]."".$this->white;
             echo "\nStatus : ".$this->lighgreen."True".$this->white;
             echo "\nUserID : ".$userid;
             echo "\nUsername : ".$username;
             echo"\n";
+            echo"\n";
+            echo "".$this->lighgreen."Delay : ".$this->white;
+            $delay = trim(fgets(STDIN));
+            echo "\n";
             echo "".$this->white."---Proccess running----";
             echo "\n";
+            echo $this->UnfollowNotFollback($userid, $delay, $status->useragent, $status->cookie);
             echo $this->orange."\nProccess complete. Run Again? ".$this->white."y/n";
             echo "\nSelect option : ".$this->lighgreen."";
             $option = trim(fgets(STDIN));
@@ -229,11 +235,11 @@ class Instagram
             $cek = json_decode($check[1]);
             if($cek->followed_by == false){
                 $ij = $ij + 1;
-                print $ij.' => @'.$username.' <font color="red">Belum follback!</font><br>';
+                echo $this->white."[".$this->date."][".$ij."] @".$username.$this->red." Belum follback!".$this->white."\n";
                 //$unfollow = $this->instagram(1, $useragent, 'friendships/destroy/'.$user_id.'/', $cookie, $this->generateSignature('{"user_id":"'.$user_id.'"}'));
                 //$obj2 = json_decode($unfollow[1]);
                 //if($obj2->status == "ok"){
-                    print '<font color="blue">Mengunfollow</font> @'.$username.' <font color="green">sukses</font><br>';
+                    echo $this->white."[".$this->date."] ".$this->lightblue."Mengunfollow @".$username.$this->green." success".$this->white."\n";
                 //}else{
                 //    print '<font color="blue">Mengunfollow</font> @'.$username.' <font color="red">gagal</font><br>';
                 //}
@@ -245,7 +251,7 @@ class Instagram
                 flush();
                 ob_flush();
             }else{
-                print '@'.$username.' <font color="green">Sudah follback~</font><br>';
+                echo $this->white."[".$this->date."] @".$username.$this->green." Sudah follback!".$this->white."\n";
                 flush();
                 ob_flush();
             }
@@ -255,7 +261,7 @@ class Instagram
             exit();
         }
         $i--;
-        print $i.' <font color="orange">Orang belum follow dan sudah diunfollow</font><br>';
+        echo $this->white."[".$this->date."][".$i."] ".$this->yellow." Orang belum follow dan sudah diunfollow!".$this->white."\n";
     }
 }
 
