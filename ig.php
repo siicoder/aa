@@ -152,11 +152,14 @@ class Instagram
         echo "Copyright © 2018 ".$this->blue."Ramadhani Pratama".$this->white."\n";
         echo "---------------------------------------------\n";
         echo " -> 1. ".$this->lighgreen."Unfollow Not Follback".$this->white."\n";
+        echo " -> 2. ".$this->lighgreen."Unfollow All".$this->white."\n";
         echo "\nSelect option : ".$this->lighgreen."";
         $option = trim(fgets(STDIN));
         echo "".$this->white."\n";
         if($option == '1'){
             $this->ViewUnfollowNotFollback();
+        }else if($option == '2'){
+            $this->ViewUnfollowAll();
         }else{
             $this->Dashboard();
         }
@@ -220,7 +223,7 @@ class Instagram
         }
     }
     public function UnfollowNotFollback($user_id, $delay, $useragent, $cookie, $next_max_id = null, $i = 1) {
-        $following = $this->instagram(1, $useragent, 'friendships/1481093756/following?max_id='.$next_max_id, $cookie);
+        $following = $this->instagram(1, $useragent, 'friendships/'.$user_id.'/following?max_id='.$next_max_id, $cookie);
         $obj = json_decode($following[1]);
         @$max_id = $obj->next_max_id;
         $ij = 0;
@@ -255,6 +258,94 @@ class Instagram
         }
         $i--;
         echo $this->white."[".date("h:i:s")."][".$i."] ".$this->yellow." Orang belum follow dan sudah diunfollow!".$this->white."\n";
+    }
+    public function ViewUnfollowAll() {
+        echo "---------------------------------------------\n";
+        echo "Unfollow All Login\n";
+        echo "---------------------------------------------\n";
+        echo "".$this->lighgreen."Username : ".$this->white;
+        $username = trim(fgets(STDIN));
+        echo "".$this->lighgreen."Password : ".$this->black;
+        $password = trim(fgets(STDIN));
+        echo "\n";
+        echo "".$this->orange."Please wait checking username/password ...".$this->white;
+        $status = json_decode($this->getCookie($username,$password));
+        if($status->status == 'ok'){
+            echo "\n".$this->orange."Getting cookies...".$this->white;
+            $userid = @$status->logged_in_user->pk;
+            $username = @$status->logged_in_user->username;
+            echo"\n";
+            echo"\n";
+            echo "".$this->white."---Information----";
+            echo"\n";
+            $ip = $this->curl('https://www.instabotlike.net/lib/ip.php');
+            echo "\nIP : ".$this->orange."".$ip[1]."".$this->white;
+            echo "\nStatus : ".$this->lighgreen."True".$this->white;
+            echo "\nUserID : ".$userid;
+            echo "\nUsername : ".$username;
+            echo"\n";
+            echo"\n";
+            echo "".$this->lighgreen."Delay(in seconds) : ".$this->white;
+            $delay = trim(fgets(STDIN));
+            echo "\n";
+            echo "".$this->white."---Proccess running----";
+            echo "\n";
+            //echo $this->UnfollowAll($userid, $delay, $status->useragent, $status->cookie);
+            echo $this->orange."\nProccess complete. Run Again? ".$this->white."y/n";
+            echo "\nSelect option : ".$this->lighgreen."";
+            $option = trim(fgets(STDIN));
+            if($option == 'y'){
+                echo $this->white;
+                $this->ViewUnfollowAll();
+            }else{
+                echo $this->white;
+                $this->Dashboard();
+            }
+        }else{
+            echo"\n";
+            echo "\nError : ".$this->red."Username/password incorret.".$this->white;
+            echo"\n";
+            echo $this->orange."\nRelogin Unfollow All? ".$this->white."y/n";
+            echo "\nSelect option : ".$this->lighgreen."";
+            $option = trim(fgets(STDIN));
+            if($option == 'y'){
+                echo $this->white;
+                $this->ViewUnfollowAll();
+            }else{
+                echo $this->white;
+                $this->Dashboard();
+            }
+        }
+    }
+    public function UnfollowAll($user_id, $delay, $useragent, $cookie, $next_max_id = null, $i = 1) {
+        $following = $this->instagram(1, $useragent, 'friendships/'.$user_id.'/following?max_id='.$next_max_id, $cookie);
+        $obj = json_decode($following[1]);
+        @$max_id = $obj->next_max_id;
+        $ij = 0;
+        foreach ($obj->users as $users){ 
+            $user_id = $users->pk;
+            $username = $users->username;
+            $ij = $ij + 1;
+            $unfollow = $this->instagram(1, $useragent, 'friendships/destroy/'.$user_id.'/', $cookie, $this->generateSignature('{"user_id":"'.$user_id.'"}'));
+            $obj2 = json_decode($unfollow[1]);
+            if($obj2->status == "ok"){
+                echo $this->white."[".date("h:i:s")."] ".$this->lightblue."Mengunfollow ".$this->white."@".$username.$this->green." success".$this->white."\n";
+            }else{
+                echo $this->white."[".date("h:i:s")."] ".$this->lightblue."Mengunfollow ".$this->white."@".$username.$this->red." failed".$this->white."\n";
+            }
+            if($ij >= 10){
+                echo "\n".$this->white."[".date("h:i:s")."]".$this->yellow." Delay ".$delay." seconds".$this->white."\n\n";
+                sleep($delay);
+                $ij = 0;
+            }
+            $i++;
+            
+        }
+        if($max_id) {
+            $this->UnfollowAll($user_id, $delay, $useragent, $cookie, $max_id, $i);
+            exit();
+        }
+        $i--;
     }
 }
 $sys = new Instagram();
