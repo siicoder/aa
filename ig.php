@@ -241,7 +241,7 @@ class Instagram
                     echo $this->white."[".$this->date."] ".$this->lightblue."Mengunfollow ".$this->white."@".$username.$this->red." failed".$this->white."\n";
                 //}
                 if($ij >= 10){
-                    echo $this->white."[".$this->date."] ".$this->yellow." Delay ".$delay." seconds".$this->white."\n";
+                    echo "\n".$this->white."[".$this->date."]".$this->yellow." Delay ".$delay." seconds".$this->white."\n\n";
                     sleep($delay);
                     $ij = 0;
                 }
