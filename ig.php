@@ -153,6 +153,8 @@ class Instagram
         echo "---------------------------------------------\n";
         echo " -> 1. ".$this->lighgreen."Unfollow Not Follback".$this->white."\n";
         echo " -> 2. ".$this->lighgreen."Unfollow All".$this->white."\n";
+        echo " -> 3. ".$this->lighgreen."Follow By Target ".$this->yellow."(coming soon)".$this->white."\n";
+        echo " -> 4. ".$this->lighgreen."Follow By Tag ".$this->yellow."(coming soon)".$this->white."\n";
         echo "\nSelect option : ".$this->lighgreen."";
         $option = trim(fgets(STDIN));
         echo "".$this->white."\n";
@@ -339,7 +341,6 @@ class Instagram
                 $ij = 0;
             }
             $i++;
-            
         }
         if($max_id) {
             $this->UnfollowAll($user_id, $delay, $useragent, $cookie, $max_id, $i);
