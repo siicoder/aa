@@ -237,7 +237,7 @@ class Instagram
                 //if($obj2->status == "ok"){
                     echo $this->white."[".date("h:i:s")."] ".$this->lightblue."Mengunfollow ".$this->white."@".$username.$this->green." success".$this->white."\n";
                 //}else{
-                    echo $this->white."[".date("h:i:s")."] ".$this->lightblue."Mengunfollow ".$this->white."@".$username.$this->red." failed".$this->white."\n";
+                    //echo $this->white."[".date("h:i:s")."] ".$this->lightblue."Mengunfollow ".$this->white."@".$username.$this->red." failed".$this->white."\n";
                 //}
                 if($ij >= 10){
                     echo "\n".$this->white."[".date("h:i:s")."]".$this->yellow." Delay ".$delay." seconds".$this->white."\n\n";
