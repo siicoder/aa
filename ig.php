@@ -7,7 +7,6 @@ class Instagram
 {
     function __construct() {
         date_default_timezone_set("Asia/Jakarta");
-        $this->date = date("h:i:s");
         $this->nc = "\e[0m";
         $this->white = "\e[37m";
         $this->black = "\e[0;30m";
@@ -232,22 +231,22 @@ class Instagram
             $cek = json_decode($check[1]);
             if($cek->followed_by == false){
                 $ij = $ij + 1;
-                echo $this->white."[".$this->date."]".$this->yellow."[".$ij."]".$this->white." @".$username.$this->red." Belum follback!".$this->white."\n";
+                echo $this->white."[".date("h:i:s")."]".$this->yellow."[".$ij."]".$this->white." @".$username.$this->red." Belum follback!".$this->white."\n";
                 //$unfollow = $this->instagram(1, $useragent, 'friendships/destroy/'.$user_id.'/', $cookie, $this->generateSignature('{"user_id":"'.$user_id.'"}'));
                 //$obj2 = json_decode($unfollow[1]);
                 //if($obj2->status == "ok"){
-                    echo $this->white."[".$this->date."] ".$this->lightblue."Mengunfollow ".$this->white."@".$username.$this->green." success".$this->white."\n";
+                    echo $this->white."[".date("h:i:s")."] ".$this->lightblue."Mengunfollow ".$this->white."@".$username.$this->green." success".$this->white."\n";
                 //}else{
-                    echo $this->white."[".$this->date."] ".$this->lightblue."Mengunfollow ".$this->white."@".$username.$this->red." failed".$this->white."\n";
+                    echo $this->white."[".date("h:i:s")."] ".$this->lightblue."Mengunfollow ".$this->white."@".$username.$this->red." failed".$this->white."\n";
                 //}
                 if($ij >= 10){
-                    echo "\n".$this->white."[".$this->date."]".$this->yellow." Delay ".$delay." seconds".$this->white."\n\n";
+                    echo "\n".$this->white."[".date("h:i:s")."]".$this->yellow." Delay ".$delay." seconds".$this->white."\n\n";
                     sleep($delay);
                     $ij = 0;
                 }
                 $i++;
             }else{
-                echo $this->white."[".$this->date."] @".$username.$this->green." Sudah follback!".$this->white."\n";
+                echo $this->white."[".date("h:i:s")."] @".$username.$this->green." Sudah follback!".$this->white."\n";
             }
         }
         if($max_id) {
@@ -255,7 +254,7 @@ class Instagram
             exit();
         }
         $i--;
-        echo $this->white."[".$this->date."][".$i."] ".$this->yellow." Orang belum follow dan sudah diunfollow!".$this->white."\n";
+        echo $this->white."[".date("h:i:s")."][".$i."] ".$this->yellow." Orang belum follow dan sudah diunfollow!".$this->white."\n";
     }
 }
 $sys = new Instagram();
