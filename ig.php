@@ -377,11 +377,22 @@ class Instagram
             echo "\nUsername : ".$username;
             echo"\n";
             echo"\n";
-            echo "".$this->lighgreen."Target : ".$this->white;
+            echo "".$this->lighgreen."Target : ".$this->white."\n";
             echo " -> 1. ".$this->lightcyan."Followers".$this->white."\n";
             echo " -> 2. ".$this->lightcyan."Followings".$this->white."\n";
             echo "".$this->lighgreen."Option : ".$this->white;
             $type = trim(fgets(STDIN));
+            if($type == "1"){
+                $typef = 'followers';
+            }else if($type == "2"){
+                $typef = 'followings';
+            }else{
+                echo "".$this->lighgreen."Target : ".$this->white."\n";
+                echo " -> 1. ".$this->lightcyan."Followers".$this->white."\n";
+                echo " -> 2. ".$this->lightcyan."Followings".$this->white."\n";
+                echo "".$this->lighgreen."Option : ".$this->white;
+                $type = trim(fgets(STDIN));
+            }
             echo "".$this->lighgreen."Target Username : ".$this->white;
             $target = trim(fgets(STDIN));
             echo "".$this->lighgreen."Delay(in seconds) : ".$this->white;
