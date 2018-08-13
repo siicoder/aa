@@ -274,6 +274,6 @@ $sys = new Instagram();
 //$media_id = '1766876514429093941_1913408560';
 
 //$get = $sys->UnfollowNotFollback($user_id, 2, $useragent, $cookie);
-print '<pre>'.print_r($sys->date,1).'</pre>';
-//echo $sys->Dashboard();
+//print '<pre>'.print_r($sys->date,1).'</pre>';
+echo $sys->Dashboard();
 
