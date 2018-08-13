@@ -153,8 +153,8 @@ class Instagram
         echo "---------------------------------------------\n";
         echo " -> 1. ".$this->lighgreen."Unfollow Not Follback".$this->white."\n";
         echo " -> 2. ".$this->lighgreen."Unfollow All".$this->white."\n";
-        echo " -> 3. ".$this->lighgreen."Follow By Target ".$this->yellow."(coming soon)".$this->white."\n";
-        echo " -> 4. ".$this->lighgreen."Follow By Tag ".$this->yellow."(coming soon)".$this->white."\n";
+        echo " -> 3. ".$this->lighgreen."Follow Target".$this->yellow."(coming soon)".$this->white."\n";
+        echo " -> 4. ".$this->lighgreen."Follow Tag".$this->yellow."(coming soon)".$this->white."\n";
         echo "\nSelect option : ".$this->lighgreen."";
         $option = trim(fgets(STDIN));
         echo "".$this->white."\n";
@@ -162,6 +162,8 @@ class Instagram
             $this->ViewUnfollowNotFollback();
         }else if($option == '2'){
             $this->ViewUnfollowAll();
+        }else if($option == '3'){
+            $this->ViewFollowTarget();
         }else{
             $this->Dashboard();
         }
@@ -347,6 +349,72 @@ class Instagram
             exit();
         }
         $i--;
+    }
+
+    public function ViewFollowTarget() {
+        echo "---------------------------------------------\n";
+        echo "Follow Target Login\n";
+        echo "---------------------------------------------\n";
+        echo "".$this->lighgreen."Username : ".$this->white;
+        $username = trim(fgets(STDIN));
+        echo "".$this->lighgreen."Password : ".$this->black;
+        $password = trim(fgets(STDIN));
+        echo "\n";
+        echo "".$this->orange."Please wait checking username/password ...".$this->white;
+        $status = json_decode($this->getCookie($username,$password));
+        if($status->status == 'ok'){
+            echo "\n".$this->orange."Getting cookies...".$this->white;
+            $userid = @$status->logged_in_user->pk;
+            $username = @$status->logged_in_user->username;
+            echo"\n";
+            echo"\n";
+            echo "".$this->white."---Information----";
+            echo"\n";
+            $ip = $this->curl('https://www.instabotlike.net/lib/ip.php');
+            echo "\nIP : ".$this->orange."".$ip[1]."".$this->white;
+            echo "\nStatus : ".$this->lighgreen."True".$this->white;
+            echo "\nUserID : ".$userid;
+            echo "\nUsername : ".$username;
+            echo"\n";
+            echo"\n";
+            echo "".$this->lighgreen."Target : ".$this->white;
+            echo " -> 1. ".$this->lightcyan."Followers".$this->white."\n";
+            echo " -> 2. ".$this->lightcyan."Followings".$this->white."\n";
+            echo "".$this->lighgreen."Option : ".$this->white;
+            $type = trim(fgets(STDIN));
+            echo "".$this->lighgreen."Target Username : ".$this->white;
+            $target = trim(fgets(STDIN));
+            echo "".$this->lighgreen."Delay(in seconds) : ".$this->white;
+            $delay = trim(fgets(STDIN));
+            echo "\n";
+            echo "".$this->white."---Proccess running----";
+            echo "\n";
+            //echo $this->UnfollowAll($userid, $delay, $status->useragent, $status->cookie);
+            echo $this->orange."\nProccess complete. Run Again? ".$this->white."y/n";
+            echo "\nSelect option : ".$this->lighgreen."";
+            $option = trim(fgets(STDIN));
+            if($option == 'y'){
+                echo $this->white;
+                $this->ViewFollowTarget();
+            }else{
+                echo $this->white;
+                $this->Dashboard();
+            }
+        }else{
+            echo"\n";
+            echo "\nError : ".$this->red."Username/password incorret.".$this->white;
+            echo"\n";
+            echo $this->orange."\nRelogin Follow Target? ".$this->white."y/n";
+            echo "\nSelect option : ".$this->lighgreen."";
+            $option = trim(fgets(STDIN));
+            if($option == 'y'){
+                echo $this->white;
+                $this->ViewFollowTarget();
+            }else{
+                echo $this->white;
+                $this->Dashboard();
+            }
+        }
     }
 }
 $sys = new Instagram();
