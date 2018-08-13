@@ -16,4 +16,6 @@ $ sudo apt-get install git<br>
 $ sudo apt-get install php<br>
 $ sudo apt-get install curl<br>
 $ rm -rf instagram && git clone https://github.com/morscheck/instagram.git<br>
-$ php instagram/ig.php
+$ php instagram/ig.php<br>
+<br>
+DO WITH YOUR OWN RISK!
