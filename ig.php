@@ -257,7 +257,7 @@ class Instagram
             exit();
         }
         $i--;
-        echo $this->white."[".date("h:i:s")."][".$i."] ".$this->yellow." Orang belum follow dan sudah diunfollow!".$this->white."\n";
+        echo $this->white."[".date("h:i:s")."][".$i."]".$this->yellow." Orang belum follow dan sudah diunfollow!".$this->white."\n";
     }
     public function ViewUnfollowAll() {
         echo "---------------------------------------------\n";
@@ -290,7 +290,7 @@ class Instagram
             echo "\n";
             echo "".$this->white."---Proccess running----";
             echo "\n";
-            //echo $this->UnfollowAll($userid, $delay, $status->useragent, $status->cookie);
+            echo $this->UnfollowAll($userid, $delay, $status->useragent, $status->cookie);
             echo $this->orange."\nProccess complete. Run Again? ".$this->white."y/n";
             echo "\nSelect option : ".$this->lighgreen."";
             $option = trim(fgets(STDIN));
