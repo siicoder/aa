@@ -239,7 +239,7 @@ class Instagram
                 //$unfollow = $this->instagram(1, $useragent, 'friendships/destroy/'.$user_id.'/', $cookie, $this->generateSignature('{"user_id":"'.$user_id.'"}'));
                 //$obj2 = json_decode($unfollow[1]);
                 //if($obj2->status == "ok"){
-                    echo $this->white."[".$this->date."] ".$this->lightblue."Mengunfollow @".$username.$this->green." success".$this->white."\n";
+                    echo $this->white."[".$this->date."] ".$this->lightblue."Mengunfollow ".$this->white."@".$username.$this->green." success".$this->white."\n";
                 //}else{
                 //    print '<font color="blue">Mengunfollow</font> @'.$username.' <font color="red">gagal</font><br>';
                 //}
@@ -248,12 +248,8 @@ class Instagram
                     $ij = 0;
                 }
                 $i++;
-                flush();
-                ob_flush();
             }else{
                 echo $this->white."[".$this->date."] @".$username.$this->green." Sudah follback!".$this->white."\n";
-                flush();
-                ob_flush();
             }
         }
         if($max_id) {
