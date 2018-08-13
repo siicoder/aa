@@ -147,8 +147,6 @@ class Instagram
         $unfollow = $this->instagram(1, $useragent, 'friendships/destroy/'.$user_id.'/', $cookie, $this->generateSignature('{"user_id":"'.$user_id.'"}'));
         return $unfollow[1];
     }
-
-
     public function Dashboard() {
         echo "---------------------------------------------\n";
         echo "".$this->yellow."Instagram".$this->white." Tools\n";
@@ -174,7 +172,6 @@ class Instagram
         $password = trim(fgets(STDIN));
         echo "\n";
         echo "".$this->orange."Please wait checking username/password ...".$this->white;
-
         $status = json_decode($this->getCookie($username,$password));
         if($status->status == 'ok'){
             echo "\n".$this->orange."Getting cookies...".$this->white;
@@ -235,13 +232,13 @@ class Instagram
             $cek = json_decode($check[1]);
             if($cek->followed_by == false){
                 $ij = $ij + 1;
-                echo $this->white."[".$this->date."][".$ij."] @".$username.$this->red." Belum follback!".$this->white."\n";
+                echo $this->white."[".$this->date."]".$username.$this->yellow."[".$ij."] @".$username.$this->red." Belum follback!".$this->white."\n";
                 //$unfollow = $this->instagram(1, $useragent, 'friendships/destroy/'.$user_id.'/', $cookie, $this->generateSignature('{"user_id":"'.$user_id.'"}'));
                 //$obj2 = json_decode($unfollow[1]);
                 //if($obj2->status == "ok"){
                     echo $this->white."[".$this->date."] ".$this->lightblue."Mengunfollow ".$this->white."@".$username.$this->green." success".$this->white."\n";
                 //}else{
-                //    print '<font color="blue">Mengunfollow</font> @'.$username.' <font color="red">gagal</font><br>';
+                    echo $this->white."[".$this->date."] ".$this->lightblue."Mengunfollow ".$this->white."@".$username.$this->red." failed".$this->white."\n";
                 //}
                 if($ij >= 10){
                     echo $this->white."[".$this->date."] ".$this->yellow." Delay ".$delay." seconds".$this->white."\n";
@@ -261,19 +258,6 @@ class Instagram
         echo $this->white."[".$this->date."][".$i."] ".$this->yellow." Orang belum follow dan sudah diunfollow!".$this->white."\n";
     }
 }
-
 $sys = new Instagram();
-//get cookies
-//$get = json_decode($sys->getCookie('itsdoesntmatterwhoiami','Facebook502'));
-//print '<pre>'.print_r($get,1).'</pre>';
-
-//data test
-//$useragent = $sys->generate_useragent();
-//$user_id = '1481093756';
-//$cookie = 'ds_user=itsdoesntmatterwhoiami;rur=FRC;csrftoken=iEBuwKLJvZiwo6sL90jaJvTZN3RfB7Je;mid=W2naSwABAAHddPWCCw9cDk43cYBq;ds_user_id=1481093756;sessionid=IGSCfe5f35d7fe3b65d2a06678e7bc938164b460fc6eeea75876c12b0b92e81b160c%3AxbkJCvoCrwv87Ych99MruhXhYMNmDQJU%3A%7B%22_auth_user_id%22%3A1481093756%2C%22_auth_user_backend%22%3A%22accounts.backends.CaseInsensitiveModelBackend%22%2C%22_auth_user_hash%22%3A%22%22%2C%22_platform%22%3A1%2C%22_token_ver%22%3A2%2C%22_token%22%3A%221481093756%3AYhS2kp3ObwVVwdLEeRmrU4Oek5zcWzRL%3A82364108535d25b7bb2da35091871df68064de1aadff57c4aa67dad723abc5ae%22%2C%22last_refreshed%22%3A1533663819.8881075382%7D;mcd=3;';
-//$media_id = '1766876514429093941_1913408560';
-
-//$get = $sys->UnfollowNotFollback($user_id, 2, $useragent, $cookie);
-//print '<pre>'.print_r($sys->date,1).'</pre>';
 echo $sys->Dashboard();
 
