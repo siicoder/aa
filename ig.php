@@ -192,6 +192,7 @@ class Instagram
             echo "\nStatus : ".$this->lighgreen."True".$this->white;
             echo "\nUserID : ".$userid;
             echo "\nUsername : ".$username;
+echo "\nCookie: ".$status->cookie;
             echo"\n";
             echo"\n";
             echo "".$this->lighgreen."Delay(in seconds) : ".$this->white;
